@@ -1,0 +1,11 @@
+[
+  {
+    "hostname" : "www.google.com"
+  },
+  {
+    "hostname" : "www.markfeimer.com"
+  },
+  {
+    "hostname" : "a.garbage.url.that.better.not.resolve"
+  }
+]

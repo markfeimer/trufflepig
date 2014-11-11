@@ -1,0 +1,25 @@
+{
+  "name": "trufflepig",
+  "version": "0.1.0",
+  "description": "A query and status tool for RESTful resources.  Rooting around in URLs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/markfeimer/trufflepig.git"
+  },
+  "keywords": [
+    "nodejs",
+    "rest"
+  ],
+  "author": "Mark Feimer",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/markfeimer/trufflepig/issues"
+  },
+  "dependencies": {
+    "colors": "~1.0.3"
+  }
+}
