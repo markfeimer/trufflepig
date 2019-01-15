@@ -21,32 +21,33 @@ var pig = {
   sendRequest: function(o) {
     var that = this;
 
-    // example of all options configurable via list.json
-    //   {
-    //       "host":"www.google.com",
-    //       "protocol":"http",
-    //       "path":"/",
-    //       "method":"GET"
-    //   }
-
     var options = {
       host: o.host, // no default applicable, since we haven't yet implemented a mind reading plugin
       port: o.port || 80, // port is not implemented yet
       method: o.method || 'GET',
       path: o.path || '/',
-      protocol: o.protocol || "http"
+      // protocol: o.protocol || "http", [do not add protocol to options object that goes to request because it will break]
+      body: o.body || undefined
     };
 
-    options.uri = options.protocol + "://" + options.host;
+    // construct the uri, a required property for the options object sent to request()
+    options.uri = o.protocol + "://" + options.host;
     // handle custom ports if we have them
     if (options.port !== 80) {
       options.uri = options.uri + ":" + options.port;
     }
 
+    // check if we're sending json as a payload
+    // and be double sure because typeof(null) returns "object"
+    if (typeof(options.body) === "object" && options.body !== null) {
+      options.json = true;
+    }
+
     options.uri = options.uri + options.path;
 
-    request(options.uri, function (error, response, body) {
+    request(options, function (error, response, body) {
       console.log(colors.yellow('uri:' + options.uri));
+      console.log(colors.yellow('method:' + options.method));
       if (error !== null) {
         that.logError(error)
       } else {
@@ -59,11 +60,20 @@ var pig = {
   logResponse: function(response) {
       // console.log('statusCode:', response && response.statusCode);
       console.log(colors.green('status code: ' + response.statusCode));
+
+      // only log json so we don't get blocks of html
+      if (response.headers['content-type'] === 'application/json') {
+        console.log(colors.green('response body on next line:'));
+        console.log(colors.green(JSON.stringify(response.body)));
+      }
+
+      // console.log(colors.green('response body: ' + response.body));
       this.afterRequest();
   },
 
   logError: function(error) {
-      console.log(colors.red('error: ' + error));
+      console.log(colors.red('raw error output below this line'));
+      console.log(colors.red(error));
       this.afterRequest()
   },
 
