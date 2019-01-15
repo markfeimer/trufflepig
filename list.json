@@ -12,5 +12,12 @@
   {
     "host" : "a.garbage.url.that.better.not.resolve",
     "protocol" : "http"
+  },
+  {
+    "host" : "postman-echo.com",
+    "protocol" : "https",
+    "path" : "/post",
+    "method" : "POST",
+    "body" : {"product": "foo", "platform": "bar"}
   }
 ]

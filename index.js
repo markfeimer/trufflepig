@@ -62,7 +62,9 @@ var pig = {
       console.log(colors.green('status code: ' + response.statusCode));
 
       // only log json so we don't get blocks of html
-      if (response.headers['content-type'] === 'application/json') {
+      // some providers return "charset=utf-8" within the content-type string
+      // so set this as a string detection
+      if (response.headers['content-type'].indexOf('application/json') > -1) {
         console.log(colors.green('response body on next line:'));
         console.log(colors.green(JSON.stringify(response.body)));
       }
