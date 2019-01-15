@@ -1,11 +1,16 @@
 [
   {
-    "hostname" : "www.google.com"
+    "host" : "www.google.com",
+    "protocol" : "http",
+    "path" : "/",
+    "method": "GET"
   },
   {
-    "hostname" : "www.markfeimer.com"
+    "host" : "www.markfeimer.com",
+    "protocol" : "http"
   },
   {
-    "hostname" : "a.garbage.url.that.better.not.resolve"
+    "host" : "a.garbage.url.that.better.not.resolve",
+    "protocol" : "http"
   }
 ]
